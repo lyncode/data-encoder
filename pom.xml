@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.lyncode</groupId>
+    <artifactId>data-encoder</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <name>Data Encoder</name>
+    <description>Really silly application do encode data</description>
+
+    <modules>
+        <module>data-encoder-core</module>
+        <module>data-encoder-web</module>
+    </modules>
+
+    <properties>
+        <spring.version>4.0.3.RELEASE</spring.version>
+        <spring.security.version>3.2.4.RELEASE</spring.security.version>
+        <spring.boot.version>1.0.2.RELEASE</spring.boot.version>
+
+        <jtwig.version>2.1.7</jtwig.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,41 @@
+{% extends 'layout/base.twig.html' %}
+{% block content %}
+{% if (error) %}
+<div class="alert alert-danger">
+    <b>Error</b> {{ error }}
+</div>
+{% endif %}
+
+<form class="form-horizontal" action="{{ path '/admin' }}" method="post">
+    <div class="form-group">
+        <label style="color: white;">Name</label>
+        <input name="name" class="form-control" type="text" placeholder="Key name..." />
+    </div>
+    <button class="btn btn-primary">Create</button>
+</form>
+
+{% if (keys) %}
+<div class="row">
+    <table class="table table-hover">
+        <thead>
+            <th style="color: white;">Key</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for key in keys %}
+            <tr>
+                <td style="color: white;">{{ key.name }}</td>
+                <td><a style="color: #FFF;" href="{{ path '/admin' }}/{{ key.name }}/download">Download Keystore</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if (keyValue) %}
+<div class="row">
+    <a style="color: #FFF;" href="{{ path '/admin' }}/{{ keyValue }}/download">Download new keystore</a>
+</div>
+{% endif %}
+{% endblock %}

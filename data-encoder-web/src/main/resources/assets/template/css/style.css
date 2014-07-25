@@ -1,0 +1,20 @@
+body {
+    background-image: url(../img/back.jpg);
+    color: #EAEAEA;
+}
+
+.title {
+    font-weight: 100;
+    text-align: center;
+    margin-top: 150px;
+    color: #EAEAEA;
+}
+
+.title .encoder {
+    color: indianred;
+    font-size: 70px;
+}
+.title .data {
+    color: white;
+    font-size: 20px;
+}

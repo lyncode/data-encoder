@@ -1,0 +1,62 @@
+{% extends 'layout/base.twig.html' %}
+{% block content %}
+{% if (error) %}
+<div class="alert alert-danger">
+    <b>Error</b> {{ error }}
+</div>
+{% endif %}
+{% if (keys) %}
+<div class="row">
+    <form class="col-lg-8 col-lg-offset-2 form-inline form-group-lg" method="post" action="{{ path '/' }}">
+        <div class="input-group">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span id="value">{{ default(keyValue, keys.get(0).name) }}</span> <span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu">
+                    {% for key in keys %}
+                    <li id="key_{{ key.name }}"><a>{{ key.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div><!-- /btn-group -->
+            <input name="text" type="text" class="form-control" value="{{ default(text, '') }}" placeholder="Type your text to encrypt..." />
+        </div><!-- /input-group -->
+        <input type="hidden" name="name" value="{{ default(keyValue, keys.get(0).name) }}" />
+    </form>
+</div>
+<script>
+    $(window).ready(function (){
+        {% for key in keys %}
+        $('#key_{{ key.name }}').click(function(){
+            $('#value').html($(this).text());
+            $('input[name="name"]').val($(this).text());
+        });
+        {% endfor %}
+    });
+</script>
+{% else %}
+<div class="alert alert-danger">
+    <b>No Public Keys Defined</b>: Create one now (<a href="{{ path '/admin' }}">here</a>).
+</div>
+{% endif %}
+
+{% if (encryption) %}
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <span style="display:block; margin-top: 50px; color: white;" class="generated">Generated with key <b>{{ keyValue }}</b>:</span>
+        <textarea style="height: 300px" id="encryption" class="form-control" readonly>{{ encryption }}</textarea>
+    </div>
+</div>
+<script type="text/javascript">
+    var textBox = document.getElementById("encryption");
+    textBox.onfocus = function() {
+        textBox.select();
+
+        // Work around Chrome's little problem
+        textBox.onmouseup = function() {
+            // Prevent further mouseup intervention
+            textBox.onmouseup = null;
+            return false;
+        };
+    };
+</script>
+{% endif %}
+{% endblock %}
